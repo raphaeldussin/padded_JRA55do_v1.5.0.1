@@ -14,7 +14,7 @@ for year in $YEARS ; do
 
     fileout=$( echo $infile | sed -e "s/\.nc/\.padded\.nc/" )
     if [ ! -f $fileout ] ; then
-      ./pad_forcing/padding.py -d $INPUTDIRS -v $var -x 202001010000-202007152100  $infile
+      ./pad_forcing/padding.py -d $INPUTDIRS -v $var -x 20200715 20200716 -v $var $infile
     fi
 
   done
