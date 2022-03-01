@@ -23,3 +23,22 @@ Then create the padded files
 ```
 
 Optionally, you can create the files for 2019 to A/B test against JRA55do v1.5.0
+
+* Reproducibilty notes:
+
+Files produced by the python-based **pad_forcing** code are virtually identical to those
+produced by the older nco-based code, **EXCEPT** for the removal of a null character
+in all netcdf attributes. Model solution reproduces bitwise between forcing created with
+both padding codes when using recent versions of FMS. For older version of FMS, bitwise
+reproducibility is **NOT** possible because of the bug reported here:
+
+https://github.com/NOAA-GFDL/FMS/issues/551
+
+Since the newly produced forcing does not have null characters in netcdf attributes,
+It is not possible to recover the old answers using this flag:
+
+```
+<namelist name="data_override_nml">
+       reproduce_null_char_bug=.true.
+</namelist>
+```
